@@ -77,9 +77,8 @@ router.get('/:id/posts',validateUserId, async (req, res,next) => {
 router.post('/:id/posts',validateUserId ,validatePost ,async (req, res, next) => {
   // RETURN THE NEWLY CREATED USER POST
   try {
-    const payload = req.text
-    const newPost = await postModel.insert(payload)
-    console.log(newPost)
+    const payload = req.body
+    const newPost = await postModel.insert({text: payload.text, user_id: req.params.id})
     res.status(201).json(newPost)
   } catch(error) {
     next(error)

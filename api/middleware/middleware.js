@@ -40,7 +40,6 @@ function validatePost(req, res, next) {
     if(!payload.text) {
       res.status(400).json({message: "missing required text field"})
     } else {
-      req.text = payload
       next()
     }
 }
